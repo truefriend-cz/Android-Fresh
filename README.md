@@ -16,5 +16,5 @@ Once you have moved all the scripts you want to run, simply reboot your phone. A
 
 Also Read: How To Fix & Repair Corrupted Videos Android
 
-But there are some scripts that always require root access. While most of the scripts will run fine, scripts that change the frequency of the processor and graphics card need root permission. Download the app here.
+But there are some scripts that always require root access. While most of the scripts will run fine, scripts that change the frequency of the processor and graphics card need root permission. Download the app [HERE](https://play.google.com/store/apps/details?id=com.ryosoftware.initd).
 
