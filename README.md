@@ -1,4 +1,4 @@
-# Run & Execute Init.D Scripts Android No Root
+# Run & Execute Init.D Scripts Android (Rooted / Non-Rooted)
 
 How to run and execute Init.d scripts on Android devices without root access. Init.d is a very important file of Android operating system which executes and activates different scripts found on the phone. It is very useful because you can simply create a script you want and the Init.d file will activate it on the next boot.
 
