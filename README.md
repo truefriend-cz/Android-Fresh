@@ -7,7 +7,7 @@ Optimization of the Android OS every time it starts in the form of init.d script
  3. copy files from my repository to folder Boot
  4. open app init.d scripts support
  5. check items:
- - Try to acquire root privileges (if rotted)
+ - Try to acquire root privileges (if rooted)
  - Dont't run with normal privileges (if rooted)
  - Run scripts at boot time
  - Execution delay
