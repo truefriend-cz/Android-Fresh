@@ -14,7 +14,7 @@ Optimization of the Android OS every time it starts in the form of init.d script
  - Execute all files in selected folder
  - Selected folder (select **Boot** folder)
 
-## About init.d scripts support
+## About app: init.d scripts support
 
 How to run and execute Init.d scripts on Android devices without root access. Init.d is a very important file of Android operating system which executes and activates different scripts found on the phone. It is very useful because you can simply create a script you want and the Init.d file will activate it on the next boot.
 
