@@ -61,6 +61,7 @@ rm -f /sdcard/*.CHK;
 folders="
 	/data/data
 	/cache
+	/storage/emulated/0/Android
 "
 
 for dirname in $folders
