@@ -57,10 +57,10 @@ rm -f /sdcard/*.CHK;
 # /data/dalvik-cache
 # /system/app
 # /system/priv-app
+# /storage/emulated/0
 folders="
 	/data/data
 	/cache
-	/storage/emulated/0
 "
 
 for dirname in $folders
