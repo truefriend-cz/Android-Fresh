@@ -1,0 +1,36 @@
+#!/system/bin/sh
+
+mount -o remount,rw /cache
+mount -o remount,rw /data
+mount -o remount,rw /sdcard
+mount -o remount,rw /system
+
+#
+
+# Optimize databases
+for i in $(find /data -iname "*.db" -type f)
+do
+        sqlite3 "$i" "VACUUM;" 2>/dev/null
+        sqlite3 "$i" "REINDEX;" 2>/dev/null
+done
+
+for i in $(find /sdcard -iname "*.db" -type f)
+do
+        sqlite3 "$i" "VACUUM;" 2>/dev/null
+        sqlite3 "$i" "REINDEX;" 2>/dev/null
+done
+
+# Disable Doze
+dumpsys deviceidle disable
+
+# Defrag
+fstrim -v /data;
+fstrim -v /system;
+fstrim -v /cache;
+fstrim -v /vendor;
+fstrim -v /product;
+
+
+echo "Tweaks - OK" >> /sdcard/0_initd.txt
+
+# Done

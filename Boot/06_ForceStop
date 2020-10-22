@@ -1,0 +1,24 @@
+#!/system/bin/sh
+
+mount -o remount,rw /cache
+mount -o remount,rw /data
+mount -o remount,rw /sdcard
+mount -o remount,rw /system
+
+#
+
+# 1. Get packages
+#pm list packages -3 | awk -F ":" '{print "grep -v \""$2"\" |"}' | xargs echo > /sdcard/0_Packages.txt
+#echo '\r' >> /sdcard/0_Packages.txt
+#pm list packages -3 | awk -F ":" '{print $2}' | xargs echo | tr ' ' '\n' >> /sdcard/0_Packages.txt
+
+# 1. Force Stop packages
+for package in `pm list packages -3 |grep -v "com.touchtype.swiftkey"|grep -v "com.teslacoilsw.launcher"|grep -v "com.lonelycatgames.Xplore"|grep -v "com.topjohnwu.magisk"|grep -v "cz.covid19cz.erouska"|grep -v "com.csipsimple.plugins.codecs.pack1"|grep -v "com.ryosoftware.initd"|grep -v "com.csipsimple.plugins.codecs.g729"|grep -v "com.csipsimple"| awk -F ":" '{print $2}'`
+do
+	am force-stop $package
+done
+
+
+echo "Force Stop - OK" >> /sdcard/0_initd.txt
+
+# Done

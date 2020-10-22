@@ -1,0 +1,133 @@
+#!/system/bin/sh
+
+mount -o remount,rw /cache
+mount -o remount,rw /data
+mount -o remount,rw /sdcard
+mount -o remount,rw /system
+
+#
+
+# Disable / stop system logging (logd) daemon;
+stop logd
+
+# Clean shit
+rm -Rf /cache/*.apk;
+rm -f /data/*.log;
+rm -f /data/*.txt;
+rm -f /data/anr/*;
+rm -f /data/backup/pending/*.tmp;
+rm -f /data/cache/*.*;
+rm -f /data/data/*.log;
+rm -f /data/data/*.txt;
+rm -f /data/log/*.log;
+rm -f /data/log/*.txt;
+rm -f /data/local/*.apk;
+rm -f /data/local/*.log;
+rm -f /data/local/*.txt;
+rm -f /data/local/tmp/*;
+rm -f /data/last_alog/*.log;
+rm -f /data/last_alog/*.txt;
+rm -f /data/last_kmsg/*.log;
+rm -f /data/last_kmsg/*.txt;
+rm -f /data/mlog/*;
+rm -f /data/system/*.log;
+rm -f /data/system/*.txt;
+rm -f /data/system/dropbox/*;
+rm -Rf /data/system/usagestats/*;
+rm -f /data/system/shared_prefs/*;
+rm -f /data/tombstones/*;
+rm -Rf /sdcard/LOST.DIR;
+rm -Rf /sdcard/found000;
+rm -Rf /sdcard/LazyList;
+rm -Rf /sdcard/albumthumbs;
+rm -Rf /sdcard/kunlun;
+rm -Rf /sdcard/.CacheOfEUI;
+rm -Rf /sdcard/.bstats;
+rm -Rf /sdcard/.taobao;
+rm -Rf /sdcard/Backucup;
+rm -Rf /sdcard/MIUI/debug_log;
+rm -Rf /sdcard/wlan_logs;
+rm -Rf /sdcard/ramdump;
+rm -Rf /sdcard/UnityAdsVideoCache;
+rm -f /sdcard/*.log;
+rm -f /sdcard/*.CHK;
+
+# Cleaning Apps Cache
+# Disabled:
+# /data/dalvik-cache
+# /system/app
+# /system/priv-app
+folders="
+	/data/data
+	/cache
+	/storage/emulated/0
+"
+
+for dirname in $folders
+do
+	for path in `find $dirname -type d -iname "*cache*"`
+	do
+		rm -Rf -f $path/*;
+	done
+done
+
+# File list to cleanup
+# Disabled:
+# /data/dalvik-cache
+filelist="
+	/cache
+	/data/anr
+	/data/backup
+	/data/cache
+	/data/lineageos_updates
+	/data/local/tmp
+	/data/lost+found
+	/data/ota
+	/data/ota_package
+	/data/resource-cache
+	/data/system/batterystats.bin
+	/data/system/dropbox
+	/data/system/graphicsstats
+	/data/system/install_sessions.xml
+	/data/system/last-fstrim
+	/data/system/package_cache
+	/data/system/procstats
+	/data/system/syncmanager-log
+	/data/system/uiderrors.txt
+	/data/system/usagestats/0/monthly
+	/data/system/usagestats/0/weekly
+	/data/system/usagestats/0/yearly
+	/data/system/usagestats/daily
+	/data/tombstones
+	/sdcard/DCIM/.thumbnails
+	/system/bin/bootanimation
+	/system/media/bootanimation.zip
+"
+
+for filename in $filelist
+do
+	if [ -d $filename ]; then
+		chmod -R 777 $filename
+		rm -Rf -f $filename/*
+	fi
+	if [ -f $filename ]; then
+		chmod 777 $filename
+		rm -f $filename
+	fi
+done
+
+# Remove bak, log and tmp files
+find /data -iname "*.bak" -type f -exec rm -f {} +
+find /data -iname "*.log" -type f -exec rm -f {} +
+find /data -iname "*.tmp" -type f -exec rm -f {} +
+#find /data -iname "*.odex" -type f -exec rm -f {} +
+#find /data -iname "*.vdex" -type f -exec rm -f {} +
+
+find /system -iname "*.bak" -type f -exec rm -f {} +
+find /system -iname "*.log" -type f -exec rm -f {} +
+find /system -iname "*.tmp" -type f -exec rm -f {} +
+
+
+echo "Clean - OK" >> /sdcard/0_initd.txt
+
+# Done

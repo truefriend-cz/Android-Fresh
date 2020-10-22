@@ -1,0 +1,19 @@
+#!/system/bin/sh
+
+mount -o remount,rw /cache
+mount -o remount,rw /data
+mount -o remount,rw /sdcard
+mount -o remount,rw /system
+
+#
+
+rm -f /sdcard/0_initd.txt;
+rm -f /sdcard/0_Packages.txt;
+
+# Instead of disabling fsync remount with higher fsync interval
+mount -o remount,rw,commit=300 /data
+
+
+echo "Init - OK" >> /sdcard/0_initd.txt
+
+# Done
